@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" role="img" aria-labelledby="northsiteLogoTitle">
+  <title id="northsiteLogoTitle">Northsite</title>
+  <g fill="#111111">
+    <path d="M20 52 L20 12 L28 12 L46 40 L46 12 L54 12 L54 52 L46 52 L28 24 L28 52 Z"/>
+    <path d="M12 32 L32 4 L52 32 L44 32 L32 15 L20 32 Z"/>
+  </g>
+  <text x="66" y="42" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="0.5" fill="#111111">Northsite</text>
+</svg>

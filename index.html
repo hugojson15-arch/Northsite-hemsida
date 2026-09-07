@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Northsite — Webbplatser för lokala företag i Luleå</title>
+  <meta name="description" content="Northsite bygger snabba, moderna webbplatser åt lokala företag i Luleå. Begär en kostnadsfri offert idag.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="logo" aria-label="Northsite, startsida">
+        <img src="assets/logo.svg" alt="Northsite" height="32">
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Öppna meny">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav">
+        <a href="#tjanster">Tjänster</a>
+        <a href="#offert">Begär offert</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#offert" class="btn btn-small">Begär offert</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="eyebrow">Webbyrå i Luleå</p>
+        <h1>Fungerar din webbplats verkligen för dig — eller mot dig?</h1>
+        <p class="lead">
+          Northsite hjälper lokala företag i Luleå att gå från en gammal, långsam eller
+          otydlig webbplats till en sida som är snabb, snygg och faktiskt tar in kunder.
+          Personlig kontakt, korta beslutsvägar och en webbplats byggd efter era behov.
+        </p>
+        <div class="hero-actions">
+          <a href="#offert" class="btn btn-primary">Begär offert</a>
+          <a href="#tjanster" class="btn btn-ghost">Se vad jag erbjuder</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Våra tjänster -->
+    <section class="tjanster" id="tjanster">
+      <div class="container">
+        <h2>Våra tjänster</h2>
+        <p class="section-lead">
+          Northsite drivs av mig, Hugo Johansson, och är en enmansverksamhet med bas i Luleå.
+          Det betyder att du alltid pratar direkt med den som faktiskt bygger din webbplats
+          — inga mellanhänder, inga onödiga möten, bara raka svar och ett engagemang i att
+          just ditt lokala företag ska synas och lyckas online.
+        </p>
+
+        <div class="card-grid">
+          <article class="card">
+            <h3>Nya webbplatser</h3>
+            <p>Skräddarsydda webbplatser byggda från grunden, anpassade efter din verksamhet, dina kunder och det du vill uppnå.</p>
+          </article>
+
+          <article class="card">
+            <h3>Redesign & modernisering</h3>
+            <p>Har ni en gammal eller föråldrad hemsida? Jag moderniserar utseende, struktur och funktion utan att tappa det som redan fungerar.</p>
+          </article>
+
+          <article class="card">
+            <h3>Snabbhet & prestanda</h3>
+            <p>Långsamma sidor tappar besökare. Jag bygger lätta, snabbladdade webbplatser som fungerar lika bra i mobilen som på datorn.</p>
+          </article>
+
+          <article class="card">
+            <h3>Synlighet i sökmotorer</h3>
+            <p>Grundläggande sökmotoroptimering och tydlig struktur, så att lokala kunder i Luleå faktiskt hittar er när de söker.</p>
+          </article>
+
+          <article class="card">
+            <h3>Underhåll & support</h3>
+            <p>Löpande uppdateringar, mindre ändringar och support efter lansering — ni behöver aldrig vara ensamma med er webbplats.</p>
+          </article>
+
+          <article class="card">
+            <h3>Personlig lokal service</h3>
+            <p>Som lokalt enmansföretag i Luleå håller jag det enkelt: tydlig kommunikation, snabba svar och engagemang i ert projekt.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Begär offert -->
+    <section class="offert" id="offert">
+      <div class="container offert-inner">
+        <div class="offert-text">
+          <h2>Begär offert</h2>
+          <p class="section-lead">
+            Berätta kort vad som inte fungerar med er nuvarande webbplats — kanske är den
+            gammal, långsam, svår att uppdatera eller ger helt enkelt inte de kunder ni
+            hoppas på. Jag återkommer med förslag på lösning och en kostnadsfri offert.
+          </p>
+        </div>
+
+        <form class="form" id="offertForm" novalidate>
+          <div class="form-row">
+            <label for="offertNamn">Namn</label>
+            <input type="text" id="offertNamn" name="namn" autocomplete="name" required>
+          </div>
+
+          <div class="form-row">
+            <label for="offertForetag">Företag</label>
+            <input type="text" id="offertForetag" name="foretag" autocomplete="organization">
+          </div>
+
+          <div class="form-row">
+            <label for="offertEpost">E-post</label>
+            <input type="email" id="offertEpost" name="epost" autocomplete="email" required>
+          </div>
+
+          <div class="form-row">
+            <label for="offertTelefon">Telefonnummer</label>
+            <input type="tel" id="offertTelefon" name="telefon" autocomplete="tel">
+          </div>
+
+          <div class="form-row form-row-full">
+            <label for="offertProblem">Beskriv problemet med er nuvarande webbplats</label>
+            <textarea id="offertProblem" name="problem" rows="5" required></textarea>
+          </div>
+
+          <div class="form-row form-row-full">
+            <button type="submit" class="btn btn-primary">Skicka förfrågan</button>
+            <p class="form-status" id="offertStatus" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Kontakt -->
+    <section class="kontakt" id="kontakt">
+      <div class="container kontakt-inner">
+        <div class="kontakt-info">
+          <h2>Kontakta mig</h2>
+          <p class="section-lead">
+            Har du frågor eller vill du bara höra av dig direkt? Du når mig gärna på
+            något av sätten nedan, eller genom formuläret.
+          </p>
+
+          <ul class="contact-list">
+            <li>
+              <span class="contact-label">Namn</span>
+              <span>Hugo Johansson</span>
+            </li>
+            <li>
+              <span class="contact-label">E-post</span>
+              <a href="mailto:northsite@gmail.com">northsite@gmail.com</a>
+            </li>
+            <li>
+              <span class="contact-label">Telefon</span>
+              <a href="tel:+46703535541">070-353 55 41</a>
+            </li>
+            <li>
+              <span class="contact-label">Område</span>
+              <span>Luleå med omnejd</span>
+            </li>
+          </ul>
+        </div>
+
+        <form class="form" id="kontaktForm" novalidate>
+          <div class="form-row">
+            <label for="kontaktNamn">Namn</label>
+            <input type="text" id="kontaktNamn" name="namn" autocomplete="name" required>
+          </div>
+
+          <div class="form-row">
+            <label for="kontaktEpost">E-post</label>
+            <input type="email" id="kontaktEpost" name="epost" autocomplete="email" required>
+          </div>
+
+          <div class="form-row">
+            <label for="kontaktTelefon">Telefonnummer</label>
+            <input type="tel" id="kontaktTelefon" name="telefon" autocomplete="tel">
+          </div>
+
+          <div class="form-row form-row-full">
+            <label for="kontaktMeddelande">Meddelande</label>
+            <textarea id="kontaktMeddelande" name="meddelande" rows="5" required></textarea>
+          </div>
+
+          <div class="form-row form-row-full">
+            <button type="submit" class="btn btn-primary">Skicka meddelande</button>
+            <p class="form-status" id="kontaktStatus" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <img src="assets/logo.svg" alt="Northsite" height="24">
+      <p>&copy; <span id="year"></span> Northsite — Hugo Johansson, Luleå</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
