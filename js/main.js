@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var BUSINESS_EMAIL = "northsite@gmail.com";
+  var BUSINESS_EMAIL = "contact.northsite@gmail.com";
 
   // Klistra in webhook-URL:n från n8n (se automation/n8n-workflow.json och
   // automation/README.md) här när flödet är aktiverat. Tills den är ifylld

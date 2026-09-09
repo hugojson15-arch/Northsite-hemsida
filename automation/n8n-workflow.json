@@ -45,8 +45,8 @@
     },
     {
       "parameters": {
-        "fromEmail": "northsite@gmail.com",
-        "toEmail": "northsite@gmail.com",
+        "fromEmail": "contact.northsite@gmail.com",
+        "toEmail": "contact.northsite@gmail.com",
         "subject": "=Ny offertförfrågan – {{ $json.body.namn }}",
         "emailFormat": "text",
         "text": "=Namn: {{ $json.body.namn }}\nFöretag: {{ $json.body.foretag || '-' }}\nE-post: {{ $json.body.epost }}\nTelefon: {{ $json.body.telefon || '-' }}\n\nProblem med nuvarande webbplats:\n{{ $json.body.problem }}",
@@ -63,11 +63,11 @@
     },
     {
       "parameters": {
-        "fromEmail": "northsite@gmail.com",
+        "fromEmail": "contact.northsite@gmail.com",
         "toEmail": "={{ $json.body.epost }}",
         "subject": "Tack för din offertförfrågan – Northsite",
         "emailFormat": "text",
-        "text": "=Hej {{ $json.body.namn }},\n\nTack för att du hörde av dig till Northsite! Jag har tagit emot din offertförfrågan och återkommer inom 1–2 arbetsdagar med förslag på lösning och en kostnadsfri offert.\n\nDetta du skickade in:\n\"{{ $json.body.problem }}\"\n\nHör av dig gärna om du har fler frågor under tiden.\n\nVänliga hälsningar,\nHugo Johansson\nNorthsite\nnorthsite@gmail.com\n070-353 55 41",
+        "text": "=Hej {{ $json.body.namn }},\n\nTack för att du hörde av dig till Northsite! Jag har tagit emot din offertförfrågan och återkommer inom 1–2 arbetsdagar med förslag på lösning och en kostnadsfri offert.\n\nDetta du skickade in:\n\"{{ $json.body.problem }}\"\n\nHör av dig gärna om du har fler frågor under tiden.\n\nVänliga hälsningar,\nHugo Johansson\nNorthsite\ncontact.northsite@gmail.com\n070-353 55 41",
         "options": {}
       },
       "id": "email-customer-offert",
@@ -93,8 +93,8 @@
     },
     {
       "parameters": {
-        "fromEmail": "northsite@gmail.com",
-        "toEmail": "northsite@gmail.com",
+        "fromEmail": "contact.northsite@gmail.com",
+        "toEmail": "contact.northsite@gmail.com",
         "subject": "=Nytt meddelande från hemsidan – {{ $json.body.namn }}",
         "emailFormat": "text",
         "text": "=Namn: {{ $json.body.namn }}\nE-post: {{ $json.body.epost }}\nTelefon: {{ $json.body.telefon || '-' }}\n\nMeddelande:\n{{ $json.body.meddelande }}",
@@ -111,11 +111,11 @@
     },
     {
       "parameters": {
-        "fromEmail": "northsite@gmail.com",
+        "fromEmail": "contact.northsite@gmail.com",
         "toEmail": "={{ $json.body.epost }}",
         "subject": "Tack för ditt meddelande – Northsite",
         "emailFormat": "text",
-        "text": "=Hej {{ $json.body.namn }},\n\nTack för ditt meddelande! Jag har tagit emot det och återkommer så snart jag kan, oftast inom 1–2 arbetsdagar.\n\nDetta skickade du in:\n\"{{ $json.body.meddelande }}\"\n\nVänliga hälsningar,\nHugo Johansson\nNorthsite\nnorthsite@gmail.com\n070-353 55 41",
+        "text": "=Hej {{ $json.body.namn }},\n\nTack för ditt meddelande! Jag har tagit emot det och återkommer så snart jag kan, oftast inom 1–2 arbetsdagar.\n\nDetta skickade du in:\n\"{{ $json.body.meddelande }}\"\n\nVänliga hälsningar,\nHugo Johansson\nNorthsite\ncontact.northsite@gmail.com\n070-353 55 41",
         "options": {}
       },
       "id": "email-customer-kontakt",

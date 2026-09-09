@@ -14,7 +14,7 @@ skickar automatiskt ett bekräftelsemejl till kunden.
 
 Flödets fyra "Send Email"-noder (`Mejla Hugo – Offert`, `Autosvar – Offert`,
 `Mejla Hugo – Kontakt`, `Autosvar – Kontakt`) behöver en SMTP-koppling för
-`northsite@gmail.com`:
+`contact.northsite@gmail.com`:
 
 1. Skapa ett **App-lösenord** för Gmail-kontot: Google-kontot →
    Säkerhet → Tvåstegsverifiering måste vara på → "Applösenord" →
@@ -23,7 +23,7 @@ Flödets fyra "Send Email"-noder (`Mejla Hugo – Offert`, `Autosvar – Offert`
    - Host: `smtp.gmail.com`
    - Port: `465`
    - SSL/TLS: på
-   - User: `northsite@gmail.com`
+   - User: `contact.northsite@gmail.com`
    - Password: app-lösenordet från steg 1
 3. Öppna varje "Send Email"-nod i flödet och välj den nya SMTP-kopplingen
    (de importeras utan koppling, så detta måste göras manuellt en gång).
