@@ -3,6 +3,11 @@
 
   var BUSINESS_EMAIL = "northsite@gmail.com";
 
+  // Klistra in webhook-URL:n från n8n (se automation/n8n-workflow.json och
+  // automation/README.md) här när flödet är aktiverat. Tills den är ifylld
+  // faller formulären tillbaka till att öppna e-postprogrammet direkt.
+  var N8N_WEBHOOK_URL = "";
+
   document.getElementById("year").textContent = new Date().getFullYear();
 
   /* ---------- Mobile nav toggle ---------- */
@@ -42,7 +47,14 @@
     );
   }
 
-  function handleFormSubmit(form, statusEl, subject, buildLines, successMessage) {
+  function setSubmitDisabled(form, disabled) {
+    var button = form.querySelector("button[type=submit]");
+    if (button) {
+      button.disabled = disabled;
+    }
+  }
+
+  function handleFormSubmit(form, statusEl, subject, buildLines, payload, successMessage) {
     form.addEventListener("submit", function (event) {
       event.preventDefault();
 
@@ -53,11 +65,39 @@
       }
 
       var data = new FormData(form);
-      var mailtoLink = buildMailto(subject, buildLines(data));
 
-      window.location.href = mailtoLink;
-      showStatus(statusEl, successMessage, "success");
-      form.reset();
+      if (!N8N_WEBHOOK_URL) {
+        window.location.href = buildMailto(subject, buildLines(data));
+        showStatus(statusEl, "Tack! Ditt e-postprogram öppnas nu så att du kan skicka din förfrågan.", "success");
+        form.reset();
+        return;
+      }
+
+      setSubmitDisabled(form, true);
+      showStatus(statusEl, "Skickar...", null);
+
+      fetch(N8N_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload(data))
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("Serverfel: " + response.status);
+          }
+          showStatus(statusEl, successMessage, "success");
+          form.reset();
+        })
+        .catch(function () {
+          showStatus(
+            statusEl,
+            "Kunde inte skicka just nu. Mejla mig gärna direkt på " + BUSINESS_EMAIL + " istället.",
+            "error"
+          );
+        })
+        .finally(function () {
+          setSubmitDisabled(form, false);
+        });
     });
   }
 
@@ -68,7 +108,7 @@
   handleFormSubmit(
     offertForm,
     offertStatus,
-    "Offertförfrågan från " + "hemsidan",
+    "Offertförfrågan från hemsidan",
     function (data) {
       return [
         "Namn: " + data.get("namn"),
@@ -80,7 +120,17 @@
         data.get("problem")
       ];
     },
-    "Tack! Ditt e-postprogram öppnas nu så att du kan skicka din förfrågan."
+    function (data) {
+      return {
+        formType: "offert",
+        namn: data.get("namn"),
+        foretag: data.get("foretag") || "",
+        epost: data.get("epost"),
+        telefon: data.get("telefon") || "",
+        problem: data.get("problem")
+      };
+    },
+    "Tack! Jag återkommer inom kort med en offert."
   );
 
   /* ---------- Kontaktformulär ---------- */
@@ -101,6 +151,15 @@
         data.get("meddelande")
       ];
     },
-    "Tack för ditt meddelande! Ditt e-postprogram öppnas nu."
+    function (data) {
+      return {
+        formType: "kontakt",
+        namn: data.get("namn"),
+        epost: data.get("epost"),
+        telefon: data.get("telefon") || "",
+        meddelande: data.get("meddelande")
+      };
+    },
+    "Tack för ditt meddelande! Jag återkommer så snart jag kan."
   );
 })();

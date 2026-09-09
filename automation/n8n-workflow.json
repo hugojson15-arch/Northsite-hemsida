@@ -1,0 +1,166 @@
+{
+  "name": "Northsite – Formulär till mejl",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "northsite-formular",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "webhook-1",
+      "name": "Webhook – Formulär",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 300],
+      "webhookId": "northsite-formular"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-offert",
+              "leftValue": "={{ $json.body.formType }}",
+              "rightValue": "offert",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-1",
+      "name": "Offert eller kontakt?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "northsite@gmail.com",
+        "toEmail": "northsite@gmail.com",
+        "subject": "=Ny offertförfrågan – {{ $json.body.namn }}",
+        "emailFormat": "text",
+        "text": "=Namn: {{ $json.body.namn }}\nFöretag: {{ $json.body.foretag || '-' }}\nE-post: {{ $json.body.epost }}\nTelefon: {{ $json.body.telefon || '-' }}\n\nProblem med nuvarande webbplats:\n{{ $json.body.problem }}",
+        "options": {}
+      },
+      "id": "email-hugo-offert",
+      "name": "Mejla Hugo – Offert",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [460, 180],
+      "credentials": {
+        "smtp": { "id": "PLACEHOLDER", "name": "Northsite Gmail SMTP" }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "northsite@gmail.com",
+        "toEmail": "={{ $json.body.epost }}",
+        "subject": "Tack för din offertförfrågan – Northsite",
+        "emailFormat": "text",
+        "text": "=Hej {{ $json.body.namn }},\n\nTack för att du hörde av dig till Northsite! Jag har tagit emot din offertförfrågan och återkommer inom 1–2 arbetsdagar med förslag på lösning och en kostnadsfri offert.\n\nDetta du skickade in:\n\"{{ $json.body.problem }}\"\n\nHör av dig gärna om du har fler frågor under tiden.\n\nVänliga hälsningar,\nHugo Johansson\nNorthsite\nnorthsite@gmail.com\n070-353 55 41",
+        "options": {}
+      },
+      "id": "email-customer-offert",
+      "name": "Autosvar – Offert",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [460, 320],
+      "credentials": {
+        "smtp": { "id": "PLACEHOLDER", "name": "Northsite Gmail SMTP" }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true } }}",
+        "options": {}
+      },
+      "id": "respond-offert",
+      "name": "Svar – Offert",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [700, 250]
+    },
+    {
+      "parameters": {
+        "fromEmail": "northsite@gmail.com",
+        "toEmail": "northsite@gmail.com",
+        "subject": "=Nytt meddelande från hemsidan – {{ $json.body.namn }}",
+        "emailFormat": "text",
+        "text": "=Namn: {{ $json.body.namn }}\nE-post: {{ $json.body.epost }}\nTelefon: {{ $json.body.telefon || '-' }}\n\nMeddelande:\n{{ $json.body.meddelande }}",
+        "options": {}
+      },
+      "id": "email-hugo-kontakt",
+      "name": "Mejla Hugo – Kontakt",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [460, 460],
+      "credentials": {
+        "smtp": { "id": "PLACEHOLDER", "name": "Northsite Gmail SMTP" }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "northsite@gmail.com",
+        "toEmail": "={{ $json.body.epost }}",
+        "subject": "Tack för ditt meddelande – Northsite",
+        "emailFormat": "text",
+        "text": "=Hej {{ $json.body.namn }},\n\nTack för ditt meddelande! Jag har tagit emot det och återkommer så snart jag kan, oftast inom 1–2 arbetsdagar.\n\nDetta skickade du in:\n\"{{ $json.body.meddelande }}\"\n\nVänliga hälsningar,\nHugo Johansson\nNorthsite\nnorthsite@gmail.com\n070-353 55 41",
+        "options": {}
+      },
+      "id": "email-customer-kontakt",
+      "name": "Autosvar – Kontakt",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [460, 600],
+      "credentials": {
+        "smtp": { "id": "PLACEHOLDER", "name": "Northsite Gmail SMTP" }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true } }}",
+        "options": {}
+      },
+      "id": "respond-kontakt",
+      "name": "Svar – Kontakt",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [700, 530]
+    }
+  ],
+  "connections": {
+    "Webhook – Formulär": {
+      "main": [[{ "node": "Offert eller kontakt?", "type": "main", "index": 0 }]]
+    },
+    "Offert eller kontakt?": {
+      "main": [
+        [{ "node": "Mejla Hugo – Offert", "type": "main", "index": 0 }],
+        [{ "node": "Mejla Hugo – Kontakt", "type": "main", "index": 0 }]
+      ]
+    },
+    "Mejla Hugo – Offert": {
+      "main": [[{ "node": "Autosvar – Offert", "type": "main", "index": 0 }]]
+    },
+    "Autosvar – Offert": {
+      "main": [[{ "node": "Svar – Offert", "type": "main", "index": 0 }]]
+    },
+    "Mejla Hugo – Kontakt": {
+      "main": [[{ "node": "Autosvar – Kontakt", "type": "main", "index": 0 }]]
+    },
+    "Autosvar – Kontakt": {
+      "main": [[{ "node": "Svar – Kontakt", "type": "main", "index": 0 }]]
+    }
+  }
+}
