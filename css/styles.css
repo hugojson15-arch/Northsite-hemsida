@@ -327,6 +327,9 @@ section {
 }
 .example-preview-cafe .preview-hero {
   background: linear-gradient(135deg, #c98a4b, #8a5a2b);
+  background-image: url('../examples/assets/cafe-om.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .example-preview-bygg {
@@ -338,6 +341,9 @@ section {
 }
 .example-preview-bygg .preview-hero {
   background: linear-gradient(135deg, #d98c2b, #1c2b3a);
+  background-image: url('../examples/assets/hantverkare-hero.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .example-preview-salong {
@@ -349,6 +355,9 @@ section {
 }
 .example-preview-salong .preview-hero {
   background: linear-gradient(135deg, #e8b4bc, #c98a9b);
+  background-image: url('../examples/assets/salong-om.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 /* ---------- Offert ---------- */
