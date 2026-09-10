@@ -6,6 +6,9 @@
   <title>Northsite — Webbplatser för lokala företag i Luleå</title>
   <meta name="description" content="Northsite bygger snabba, moderna webbplatser åt lokala företag i Luleå. Begär en kostnadsfri offert idag.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -13,7 +16,10 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="#top" class="logo" aria-label="Northsite, startsida">
-        <img src="assets/logo.svg" alt="Northsite" height="32">
+        <svg class="logo-mark" viewBox="0 0 64 64" role="img" aria-hidden="true">
+          <path d="M16 50 L16 14 L48 50 L48 14" fill="none" stroke="#1f6f6b" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo-word">Northsite</span>
       </a>
 
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Öppna meny">
@@ -257,7 +263,12 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <img src="assets/logo.svg" alt="Northsite" height="24">
+      <a href="#top" class="logo logo-small" aria-label="Northsite, startsida">
+        <svg class="logo-mark" viewBox="0 0 64 64" role="img" aria-hidden="true">
+          <path d="M16 50 L16 14 L48 50 L48 14" fill="none" stroke="#1f6f6b" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo-word">Northsite</span>
+      </a>
       <p>&copy; <span id="year"></span> Northsite — Hugo Johansson, Luleå</p>
     </div>
   </footer>

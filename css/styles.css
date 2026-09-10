@@ -143,8 +143,34 @@ section {
   height: 72px;
 }
 
-.logo img {
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-mark {
   display: block;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.logo-word {
+  font-family: 'Archivo Black', Arial, sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.logo-small .logo-mark {
+  width: 22px;
+  height: 22px;
+}
+
+.logo-small .logo-word {
+  font-size: 0.95rem;
 }
 
 .primary-nav {
