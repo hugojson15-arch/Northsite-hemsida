@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salong Nord — exempel byggt av Northsite</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbf1f2;
+      --bg-alt: #f6e2e4;
+      --ink: #3a2229;
+      --ink-muted: #7a5b62;
+      --border: #eccdd1;
+      --accent: #a5495c;
+      --accent-dark: #7d3444;
+      --gold: #b98a4e;
+      --radius: 3px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Jost', -apple-system, sans-serif;
+      line-height: 1.7;
+    }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; line-height: 1.2; margin: 0 0 0.4em; text-wrap: balance; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+    a { color: var(--accent-dark); }
+
+    .demo-banner {
+      background: #2f1a20;
+      color: #f6e2e4;
+      text-align: center;
+      font-size: 0.85rem;
+      padding: 10px 16px;
+    }
+    .demo-banner a { color: #f6e2e4; text-decoration: underline; }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 26px 0;
+    }
+    .brand { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.6rem; letter-spacing: 0.02em; }
+    nav a { margin-left: 26px; color: var(--ink); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    nav a:hover { color: var(--accent-dark); }
+
+    .hero {
+      text-align: center;
+      padding: 80px 0 70px;
+    }
+    .hero .eyebrow { text-transform: uppercase; letter-spacing: 0.22em; color: var(--gold); font-weight: 600; font-size: 0.78rem; }
+    .hero h1 { font-size: clamp(2.4rem, 5.5vw, 3.8rem); max-width: 720px; margin: 16px auto 18px; }
+    .hero p { max-width: 520px; margin: 0 auto 30px; color: var(--ink-muted); font-size: 1.1rem; }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 15px 34px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+    .btn:hover { background: var(--accent-dark); }
+
+    section { padding: 64px 0; }
+
+    .behandlingar { background: var(--bg-alt); }
+    .behandlingar h2, .behandlingar .lead { text-align: center; }
+    .lead { color: var(--ink-muted); max-width: 520px; margin: 0 auto 40px; }
+    .behandling-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+    .behandling {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 26px;
+      text-align: center;
+    }
+    .behandling .divider { width: 32px; height: 2px; background: var(--gold); margin: 0 auto 14px; }
+    .behandling h3 { font-size: 1.3rem; margin-bottom: 6px; }
+    .behandling .price { color: var(--accent-dark); font-weight: 600; font-family: 'Jost', sans-serif; font-size: 0.9rem; margin-bottom: 8px; }
+    .behandling p { color: var(--ink-muted); font-size: 0.92rem; margin: 0; }
+
+    .om { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .om-art {
+      aspect-ratio: 4/5;
+      border-radius: var(--radius);
+      background: linear-gradient(160deg, #e8b4bc, #a5495c);
+    }
+
+    .info { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; text-align: center; }
+    .info h3 { font-size: 1.1rem; }
+    .info p { color: var(--ink-muted); margin: 0; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
+      text-align: center;
+      color: var(--ink-muted);
+      font-size: 0.9rem;
+    }
+    footer a { color: var(--accent-dark); }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">
+    Detta är ett fiktivt exempel byggt av <strong>Northsite</strong> — inte ett riktigt företag.
+    <a href="../index.html">Tillbaka till northsite.se</a>
+  </div>
+
+  <div class="container">
+    <header>
+      <div class="brand">Salong Nord</div>
+      <nav>
+        <a href="#behandlingar">Behandlingar</a>
+        <a href="#om">Om oss</a>
+        <a href="#boka">Boka tid</a>
+      </nav>
+    </header>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Hår & skönhet i centrala Luleå</p>
+      <h1>En stund bara för dig</h1>
+      <p>Personlig behandling i lugn miljö — klippning, färgning och styling anpassat efter dig och din vardag.</p>
+      <a class="btn" href="#boka">Boka tid</a>
+    </div>
+  </section>
+
+  <section class="behandlingar" id="behandlingar">
+    <div class="container">
+      <h2>Behandlingar</h2>
+      <p class="lead">Ett urval av det vi erbjuder — fråga oss gärna om något du inte ser här.</p>
+      <div class="behandling-grid">
+        <div class="behandling">
+          <div class="divider"></div>
+          <h3>Klippning</h3>
+          <p class="price">Från 450 kr</p>
+          <p>Konsultation, tvätt, klippning och styling.</p>
+        </div>
+        <div class="behandling">
+          <div class="divider"></div>
+          <h3>Färgning</h3>
+          <p class="price">Från 890 kr</p>
+          <p>Helfärg, slingor eller balayage efter önskemål.</p>
+        </div>
+        <div class="behandling">
+          <div class="divider"></div>
+          <h3>Styling</h3>
+          <p class="price">Från 350 kr</p>
+          <p>Fest, bröllop eller bara en helt vanlig fredag.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="om" id="om">
+    <div class="container om">
+      <div class="om-art" aria-hidden="true"></div>
+      <div>
+        <h2>Ett litet team, stort hantverk</h2>
+        <p>Vi är tre stylister som delar samma passion för hår — och för att varje kund ska lämna salongen nöjdare än de kom.</p>
+        <p>Boka enkelt online eller ring oss, så hittar vi en tid som passar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="boka">
+    <div class="container info">
+      <div>
+        <h3>Öppettider</h3>
+        <p>Tis–fre 10–18<br>Lör 10–15</p>
+      </div>
+      <div>
+        <h3>Adress</h3>
+        <p>Storgatan 24<br>972 32 Luleå</p>
+      </div>
+      <div>
+        <h3>Boka</h3>
+        <p>070-000 00 02<br>boka@salongnord.se</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      Fiktivt exempel — byggt för att visa designstil. <a href="../index.html">Se vad Northsite kan bygga åt ditt företag →</a>
+    </div>
+  </footer>
+
+</body>
+</html>
