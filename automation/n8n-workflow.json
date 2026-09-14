@@ -90,10 +90,10 @@
     {
       "parameters": {
         "fromEmail": "contact.northsite@gmail.com",
-        "toEmail": "={{ $json.body.epost }}",
+        "toEmail": "={{ $('Webhook – Formulär').item.json.body.epost }}",
         "subject": "Tack för din offertförfrågan – Northsite",
         "emailFormat": "text",
-        "text": "=Hej {{ $json.body.namn }},\n\nTack för din offertförfrågan! Vi återkommer snart med en offert.\n\nVänliga hälsningar,\nHugo Johansson\nNorthsite",
+        "text": "=Hej {{ $('Webhook – Formulär').item.json.body.namn }},\n\nTack för din offertförfrågan! Vi återkommer snart med en offert.\n\nVänliga hälsningar,\nHugo Johansson\nNorthsite",
         "options": {}
       },
       "id": "email-customer-offert",
