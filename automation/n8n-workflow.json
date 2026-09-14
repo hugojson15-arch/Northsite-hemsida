@@ -1,5 +1,5 @@
 {
-  "name": "Northsite – Formulär till mejl",
+  "name": "Northsite – Formulär till kalkylark och mejl",
   "nodes": [
     {
       "parameters": {
@@ -45,20 +45,46 @@
     },
     {
       "parameters": {
-        "fromEmail": "contact.northsite@gmail.com",
-        "toEmail": "contact.northsite@gmail.com",
-        "subject": "=Ny offertförfrågan – {{ $json.body.namn }}",
-        "emailFormat": "text",
-        "text": "=Namn: {{ $json.body.namn }}\nFöretag: {{ $json.body.foretag || '-' }}\nE-post: {{ $json.body.epost }}\nTelefon: {{ $json.body.telefon || '-' }}\n\nProblem med nuvarande webbplats:\n{{ $json.body.problem }}",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list",
+          "cachedResultName": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "",
+          "mode": "list",
+          "cachedResultName": ""
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Datum": "={{ $now.format('yyyy-MM-dd HH:mm') }}",
+            "Namn": "={{ $json.body.namn }}",
+            "Telefon": "={{ $json.body.telefon || '-' }}",
+            "E-post": "={{ $json.body.epost }}",
+            "Problem": "={{ $json.body.problem }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            { "id": "Datum", "displayName": "Datum", "type": "string" },
+            { "id": "Namn", "displayName": "Namn", "type": "string" },
+            { "id": "Telefon", "displayName": "Telefon", "type": "string" },
+            { "id": "E-post", "displayName": "E-post", "type": "string" },
+            { "id": "Problem", "displayName": "Problem", "type": "string" }
+          ]
+        },
         "options": {}
       },
-      "id": "email-hugo-offert",
-      "name": "Mejla Hugo – Offert",
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
+      "id": "sheets-offert",
+      "name": "Lägg till i kalkylark – Offert",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
       "position": [460, 180],
       "credentials": {
-        "smtp": { "id": "PLACEHOLDER", "name": "Northsite Gmail SMTP" }
+        "googleSheetsOAuth2Api": { "id": "PLACEHOLDER", "name": "Northsite Google Sheets" }
       }
     },
     {
@@ -67,14 +93,14 @@
         "toEmail": "={{ $json.body.epost }}",
         "subject": "Tack för din offertförfrågan – Northsite",
         "emailFormat": "text",
-        "text": "=Hej {{ $json.body.namn }},\n\nTack för att du hörde av dig till Northsite! Jag har tagit emot din offertförfrågan och återkommer inom 1–2 arbetsdagar med förslag på lösning och en kostnadsfri offert.\n\nDetta du skickade in:\n\"{{ $json.body.problem }}\"\n\nHör av dig gärna om du har fler frågor under tiden.\n\nVänliga hälsningar,\nHugo Johansson\nNorthsite\ncontact.northsite@gmail.com\n070-353 55 41",
+        "text": "=Hej {{ $json.body.namn }},\n\nTack för din offertförfrågan! Vi återkommer snart med en offert.\n\nVänliga hälsningar,\nHugo Johansson\nNorthsite",
         "options": {}
       },
       "id": "email-customer-offert",
       "name": "Autosvar – Offert",
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
-      "position": [460, 320],
+      "position": [700, 180],
       "credentials": {
         "smtp": { "id": "PLACEHOLDER", "name": "Northsite Gmail SMTP" }
       }
@@ -89,7 +115,7 @@
       "name": "Svar – Offert",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
-      "position": [700, 250]
+      "position": [940, 180]
     },
     {
       "parameters": {
@@ -111,24 +137,6 @@
     },
     {
       "parameters": {
-        "fromEmail": "contact.northsite@gmail.com",
-        "toEmail": "={{ $json.body.epost }}",
-        "subject": "Tack för ditt meddelande – Northsite",
-        "emailFormat": "text",
-        "text": "=Hej {{ $json.body.namn }},\n\nTack för ditt meddelande! Jag har tagit emot det och återkommer så snart jag kan, oftast inom 1–2 arbetsdagar.\n\nDetta skickade du in:\n\"{{ $json.body.meddelande }}\"\n\nVänliga hälsningar,\nHugo Johansson\nNorthsite\ncontact.northsite@gmail.com\n070-353 55 41",
-        "options": {}
-      },
-      "id": "email-customer-kontakt",
-      "name": "Autosvar – Kontakt",
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [460, 600],
-      "credentials": {
-        "smtp": { "id": "PLACEHOLDER", "name": "Northsite Gmail SMTP" }
-      }
-    },
-    {
-      "parameters": {
         "respondWith": "json",
         "responseBody": "={{ { \"success\": true } }}",
         "options": {}
@@ -137,7 +145,7 @@
       "name": "Svar – Kontakt",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
-      "position": [700, 530]
+      "position": [700, 460]
     }
   ],
   "connections": {
@@ -146,20 +154,17 @@
     },
     "Offert eller kontakt?": {
       "main": [
-        [{ "node": "Mejla Hugo – Offert", "type": "main", "index": 0 }],
+        [{ "node": "Lägg till i kalkylark – Offert", "type": "main", "index": 0 }],
         [{ "node": "Mejla Hugo – Kontakt", "type": "main", "index": 0 }]
       ]
     },
-    "Mejla Hugo – Offert": {
+    "Lägg till i kalkylark – Offert": {
       "main": [[{ "node": "Autosvar – Offert", "type": "main", "index": 0 }]]
     },
     "Autosvar – Offert": {
       "main": [[{ "node": "Svar – Offert", "type": "main", "index": 0 }]]
     },
     "Mejla Hugo – Kontakt": {
-      "main": [[{ "node": "Autosvar – Kontakt", "type": "main", "index": 0 }]]
-    },
-    "Autosvar – Kontakt": {
       "main": [[{ "node": "Svar – Kontakt", "type": "main", "index": 0 }]]
     }
   }
