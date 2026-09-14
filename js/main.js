@@ -6,7 +6,7 @@
   // Klistra in webhook-URL:n från n8n (se automation/n8n-workflow.json och
   // automation/README.md) här när flödet är aktiverat. Tills den är ifylld
   // faller formulären tillbaka till att öppna e-postprogrammet direkt.
-  var N8N_WEBHOOK_URL = "";
+  var N8N_WEBHOOK_URL = "https://northsite.app.n8n.cloud/webhook/northsite-formular";
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
