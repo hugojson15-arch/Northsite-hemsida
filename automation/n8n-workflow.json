@@ -1,0 +1,171 @@
+{
+  "name": "Northsite – Formulär till kalkylark och mejl",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "northsite-formular",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "webhook-1",
+      "name": "Webhook – Formulär",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 300],
+      "webhookId": "northsite-formular"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-offert",
+              "leftValue": "={{ $json.body.formType }}",
+              "rightValue": "offert",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-1",
+      "name": "Offert eller kontakt?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list",
+          "cachedResultName": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "",
+          "mode": "list",
+          "cachedResultName": ""
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Datum": "={{ $now.format('yyyy-MM-dd HH:mm') }}",
+            "Namn": "={{ $json.body.namn }}",
+            "Telefon": "={{ $json.body.telefon || '-' }}",
+            "E-post": "={{ $json.body.epost }}",
+            "Problem": "={{ $json.body.problem }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            { "id": "Datum", "displayName": "Datum", "type": "string" },
+            { "id": "Namn", "displayName": "Namn", "type": "string" },
+            { "id": "Telefon", "displayName": "Telefon", "type": "string" },
+            { "id": "E-post", "displayName": "E-post", "type": "string" },
+            { "id": "Problem", "displayName": "Problem", "type": "string" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "sheets-offert",
+      "name": "Lägg till i kalkylark – Offert",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [460, 180],
+      "credentials": {
+        "googleSheetsOAuth2Api": { "id": "PLACEHOLDER", "name": "Northsite Google Sheets" }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "contact.northsite@gmail.com",
+        "toEmail": "={{ $json.body.epost }}",
+        "subject": "Tack för din offertförfrågan – Northsite",
+        "emailFormat": "text",
+        "text": "=Hej {{ $json.body.namn }},\n\nTack för din offertförfrågan! Vi återkommer snart med en offert.\n\nVänliga hälsningar,\nHugo Johansson\nNorthsite",
+        "options": {}
+      },
+      "id": "email-customer-offert",
+      "name": "Autosvar – Offert",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [700, 180],
+      "credentials": {
+        "smtp": { "id": "PLACEHOLDER", "name": "Northsite Gmail SMTP" }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true } }}",
+        "options": {}
+      },
+      "id": "respond-offert",
+      "name": "Svar – Offert",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [940, 180]
+    },
+    {
+      "parameters": {
+        "fromEmail": "contact.northsite@gmail.com",
+        "toEmail": "contact.northsite@gmail.com",
+        "subject": "=Nytt meddelande från hemsidan – {{ $json.body.namn }}",
+        "emailFormat": "text",
+        "text": "=Namn: {{ $json.body.namn }}\nE-post: {{ $json.body.epost }}\nTelefon: {{ $json.body.telefon || '-' }}\n\nMeddelande:\n{{ $json.body.meddelande }}",
+        "options": {}
+      },
+      "id": "email-hugo-kontakt",
+      "name": "Mejla Hugo – Kontakt",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [460, 460],
+      "credentials": {
+        "smtp": { "id": "PLACEHOLDER", "name": "Northsite Gmail SMTP" }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true } }}",
+        "options": {}
+      },
+      "id": "respond-kontakt",
+      "name": "Svar – Kontakt",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [700, 460]
+    }
+  ],
+  "connections": {
+    "Webhook – Formulär": {
+      "main": [[{ "node": "Offert eller kontakt?", "type": "main", "index": 0 }]]
+    },
+    "Offert eller kontakt?": {
+      "main": [
+        [{ "node": "Lägg till i kalkylark – Offert", "type": "main", "index": 0 }],
+        [{ "node": "Mejla Hugo – Kontakt", "type": "main", "index": 0 }]
+      ]
+    },
+    "Lägg till i kalkylark – Offert": {
+      "main": [[{ "node": "Autosvar – Offert", "type": "main", "index": 0 }]]
+    },
+    "Autosvar – Offert": {
+      "main": [[{ "node": "Svar – Offert", "type": "main", "index": 0 }]]
+    },
+    "Mejla Hugo – Kontakt": {
+      "main": [[{ "node": "Svar – Kontakt", "type": "main", "index": 0 }]]
+    }
+  }
+}
