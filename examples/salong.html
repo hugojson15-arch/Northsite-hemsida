@@ -18,7 +18,6 @@
       --accent: #a5495c;
       --accent-dark: #7d3444;
       --gold: #b98a4e;
-      --radius: 3px;
     }
     * { box-sizing: border-box; }
     body {
@@ -29,7 +28,7 @@
       line-height: 1.7;
     }
     h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; line-height: 1.2; margin: 0 0 0.4em; text-wrap: balance; }
-    .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
     a { color: var(--accent-dark); }
 
     .demo-banner {
@@ -45,64 +44,93 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 26px 0;
+      padding: 26px 24px;
+      max-width: 1080px;
+      margin: 0 auto;
     }
     .brand { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.6rem; letter-spacing: 0.02em; }
     nav a { margin-left: 26px; color: var(--ink); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
     nav a:hover { color: var(--accent-dark); }
 
+    /* Offset editorial hero */
     .hero {
-      text-align: center;
-      padding: 80px 0 70px;
+      position: relative;
+      padding: 20px 24px 100px;
+      max-width: 1080px;
+      margin: 0 auto;
     }
-    .hero .eyebrow { text-transform: uppercase; letter-spacing: 0.22em; color: var(--gold); font-weight: 600; font-size: 0.78rem; }
-    .hero h1 { font-size: clamp(2.4rem, 5.5vw, 3.8rem); max-width: 720px; margin: 16px auto 18px; }
-    .hero p { max-width: 520px; margin: 0 auto 30px; color: var(--ink-muted); font-size: 1.1rem; }
+    .hero-photo {
+      background-image: url('assets/salong-om.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      height: 60vh;
+      min-height: 380px;
+      border-radius: 2px;
+    }
+    .hero-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      max-width: 440px;
+      padding: 40px;
+      position: relative;
+      margin: -90px 0 0 auto;
+      box-shadow: 0 20px 50px rgba(58, 34, 41, 0.12);
+    }
+    .hero-card .eyebrow { text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold); font-weight: 600; font-size: 0.72rem; }
+    .hero-card h1 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); margin: 12px 0 14px; }
+    .hero-card p { color: var(--ink-muted); margin: 0 0 24px; }
     .btn {
       display: inline-block;
       background: var(--accent);
       color: #fff;
-      padding: 15px 34px;
+      padding: 14px 30px;
       border-radius: 999px;
       text-decoration: none;
       font-weight: 500;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
     }
     .btn:hover { background: var(--accent-dark); }
 
-    section { padding: 64px 0; }
+    section { padding: 60px 0; }
 
-    .behandlingar { background: var(--bg-alt); }
-    .behandlingar h2, .behandlingar .lead { text-align: center; }
-    .lead { color: var(--ink-muted); max-width: 520px; margin: 0 auto 40px; }
-    .behandling-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
-    .behandling {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 26px;
+    /* Price-list behandlingar, no cards */
+    .behandlingar h2 { text-align: center; }
+    .behandlingar .lead { text-align: center; color: var(--ink-muted); max-width: 480px; margin: 0 auto 44px; }
+    .price-list { max-width: 620px; margin: 0 auto; }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .price-row:first-child { border-top: 1px solid var(--border); }
+    .price-row h3 { font-size: 1.35rem; margin: 0; }
+    .price-row .desc { display: block; font-family: 'Jost', sans-serif; font-size: 0.88rem; color: var(--ink-muted); margin-top: 4px; }
+    .price-row .price { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--accent-dark); white-space: nowrap; }
+
+    .om {
+      background: var(--bg-alt);
       text-align: center;
     }
-    .behandling .divider { width: 32px; height: 2px; background: var(--gold); margin: 0 auto 14px; }
-    .behandling h3 { font-size: 1.3rem; margin-bottom: 6px; }
-    .behandling .price { color: var(--accent-dark); font-weight: 600; font-family: 'Jost', sans-serif; font-size: 0.9rem; margin-bottom: 8px; }
-    .behandling p { color: var(--ink-muted); font-size: 0.92rem; margin: 0; }
+    .om .container { max-width: 640px; }
+    .om .divider { width: 40px; height: 2px; background: var(--gold); margin: 0 auto 20px; }
+    .om p { color: var(--ink-muted); margin: 0 0 1em; }
 
-    .om { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-    .om-art {
-      aspect-ratio: 4/5;
-      border-radius: var(--radius);
-      background: linear-gradient(160deg, #e8b4bc, #a5495c);
-      background-image: url('assets/salong-om.jpg');
-      background-size: cover;
-      background-position: center;
+    /* Asymmetric footer info */
+    .info-split {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 40px;
+      align-items: start;
     }
-
-    .info { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; text-align: center; }
-    .info h3 { font-size: 1.1rem; }
-    .info p { color: var(--ink-muted); margin: 0; }
+    .info-split h2 { margin-bottom: 10px; }
+    .info-split .lead-col p { color: var(--ink-muted); margin: 0; }
+    .info-list { display: flex; flex-direction: column; gap: 18px; }
+    .info-list .label { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.7rem; color: var(--gold); margin-bottom: 4px; }
 
     footer {
       border-top: 1px solid var(--border);
@@ -112,6 +140,12 @@
       font-size: 0.9rem;
     }
     footer a { color: var(--accent-dark); }
+
+    @media (max-width: 720px) {
+      .hero-card { margin: -60px 0 0; max-width: 100%; padding: 28px; }
+      .info-split { grid-template-columns: 1fr; }
+      .price-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+    }
   </style>
 </head>
 <body>
@@ -121,19 +155,17 @@
     <a href="../index.html">Tillbaka till northsite.se</a>
   </div>
 
-  <div class="container">
-    <header>
-      <div class="brand">Salong Nord</div>
-      <nav>
-        <a href="#behandlingar">Behandlingar</a>
-        <a href="#om">Om oss</a>
-        <a href="#boka">Boka tid</a>
-      </nav>
-    </header>
-  </div>
+  <header>
+    <div class="brand">Salong Nord</div>
+    <nav>
+      <a href="#behandlingar">Behandlingar</a>
+      <a href="#boka">Boka tid</a>
+    </nav>
+  </header>
 
   <section class="hero">
-    <div class="container">
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="hero-card">
       <p class="eyebrow">Hår & skönhet i centrala Luleå</p>
       <h1>En stund bara för dig</h1>
       <p>Personlig behandling i lugn miljö — klippning, färgning och styling anpassat efter dig och din vardag.</p>
@@ -145,53 +177,59 @@
     <div class="container">
       <h2>Behandlingar</h2>
       <p class="lead">Ett urval av det vi erbjuder — fråga oss gärna om något du inte ser här.</p>
-      <div class="behandling-grid">
-        <div class="behandling">
-          <div class="divider"></div>
-          <h3>Klippning</h3>
-          <p class="price">Från 450 kr</p>
-          <p>Konsultation, tvätt, klippning och styling.</p>
+      <div class="price-list">
+        <div class="price-row">
+          <div>
+            <h3>Klippning</h3>
+            <span class="desc">Konsultation, tvätt, klippning och styling</span>
+          </div>
+          <span class="price">Från 450 kr</span>
         </div>
-        <div class="behandling">
-          <div class="divider"></div>
-          <h3>Färgning</h3>
-          <p class="price">Från 890 kr</p>
-          <p>Helfärg, slingor eller balayage efter önskemål.</p>
+        <div class="price-row">
+          <div>
+            <h3>Färgning</h3>
+            <span class="desc">Helfärg, slingor eller balayage efter önskemål</span>
+          </div>
+          <span class="price">Från 890 kr</span>
         </div>
-        <div class="behandling">
-          <div class="divider"></div>
-          <h3>Styling</h3>
-          <p class="price">Från 350 kr</p>
-          <p>Fest, bröllop eller bara en helt vanlig fredag.</p>
+        <div class="price-row">
+          <div>
+            <h3>Styling</h3>
+            <span class="desc">Fest, bröllop eller bara en helt vanlig fredag</span>
+          </div>
+          <span class="price">Från 350 kr</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="om" id="om">
-    <div class="container om">
-      <div class="om-art" aria-hidden="true"></div>
-      <div>
-        <h2>Ett litet team, stort hantverk</h2>
-        <p>Vi är tre stylister som delar samma passion för hår — och för att varje kund ska lämna salongen nöjdare än de kom.</p>
-        <p>Boka enkelt online eller ring oss, så hittar vi en tid som passar.</p>
-      </div>
+  <section class="om">
+    <div class="container">
+      <div class="divider"></div>
+      <h2>Ett litet team, stort hantverk</h2>
+      <p>Vi är tre stylister som delar samma passion för hår — och för att varje kund ska lämna salongen nöjdare än de kom.</p>
     </div>
   </section>
 
   <section id="boka">
-    <div class="container info">
-      <div>
-        <h3>Öppettider</h3>
-        <p>Tis–fre 10–18<br>Lör 10–15</p>
+    <div class="container info-split">
+      <div class="lead-col">
+        <h2>Boka enkelt</h2>
+        <p>Ring oss eller skicka ett mejl, så hittar vi en tid som passar. Vi svarar oftast samma dag.</p>
       </div>
-      <div>
-        <h3>Adress</h3>
-        <p>Storgatan 24<br>972 32 Luleå</p>
-      </div>
-      <div>
-        <h3>Boka</h3>
-        <p>070-000 00 02<br>boka@salongnord.se</p>
+      <div class="info-list">
+        <div>
+          <div class="label">Öppettider</div>
+          Tis–fre 10–18<br>Lör 10–15
+        </div>
+        <div>
+          <div class="label">Adress</div>
+          Storgatan 24<br>972 32 Luleå
+        </div>
+        <div>
+          <div class="label">Kontakt</div>
+          070-000 00 02<br>boka@salongnord.se
+        </div>
       </div>
     </div>
   </section>

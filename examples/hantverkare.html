@@ -17,7 +17,7 @@
       --border: #dbe2e8;
       --navy: #16283d;
       --accent: #d9822b;
-      --radius: 6px;
+      --radius: 4px;
     }
     * { box-sizing: border-box; }
     body {
@@ -28,7 +28,7 @@
       line-height: 1.6;
     }
     h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.15; margin: 0 0 0.4em; text-wrap: balance; }
-    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
     a { color: var(--accent); }
 
     .demo-banner {
@@ -40,25 +40,15 @@
     }
     .demo-banner a { color: #f4f6f8; text-decoration: underline; }
 
-    header {
-      background: var(--navy);
-      color: #fff;
-    }
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 0;
-    }
+    header { background: var(--navy); color: #fff; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
     .brand { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.3rem; letter-spacing: 0.04em; }
     .brand span { color: var(--accent); }
     nav a { margin-left: 26px; color: #dbe2e8; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
     nav a:hover { color: var(--accent); }
 
     .hero {
-      background:
-        linear-gradient(135deg, rgba(22, 40, 61, 0.90) 0%, rgba(31, 59, 87, 0.82) 100%),
-        url('assets/hantverkare-hero.jpg');
+      background: linear-gradient(135deg, rgba(22, 40, 61, 0.90) 0%, rgba(31, 59, 87, 0.82) 100%), url('assets/hantverkare-hero.jpg');
       background-size: cover;
       background-position: center;
       color: #fff;
@@ -80,32 +70,33 @@
       font-size: 0.9rem;
     }
     .btn:hover { background: #c46f1e; }
-    .btn-outline {
-      display: inline-block;
-      border: 2px solid #fff;
-      color: #fff;
-      padding: 13px 30px;
-      border-radius: var(--radius);
-      text-decoration: none;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      font-size: 0.9rem;
-      margin-left: 14px;
-    }
 
     section { padding: 70px 0; }
 
-    .tjanster-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; margin-top: 40px; }
-    .tjanst {
-      background: var(--bg-alt);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--accent);
-      border-radius: var(--radius);
-      padding: 26px;
+    /* Numbered process list instead of a card grid */
+    .process { counter-reset: step; }
+    .process h2 { margin-bottom: 8px; }
+    .process-lead { color: var(--ink-muted); max-width: 560px; margin-bottom: 48px; }
+    .process-list { display: flex; flex-direction: column; }
+    .process-row {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 24px;
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      align-items: baseline;
     }
-    .tjanst h3 { font-size: 1.05rem; margin-bottom: 8px; }
-    .tjanst p { color: var(--ink-muted); margin: 0; font-size: 0.95rem; }
+    .process-row:last-child { border-bottom: 1px solid var(--border); }
+    .process-row::before {
+      content: counter(step, decimal-leading-zero);
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .process-row h3 { margin-bottom: 4px; font-size: 1.1rem; }
+    .process-row p { margin: 0; color: var(--ink-muted); max-width: 560px; }
 
     .referens { background: var(--navy); color: #fff; }
     .referens h2 { color: #fff; }
@@ -114,9 +105,22 @@
     .stat .num { font-family: 'Oswald', sans-serif; font-size: 2.4rem; color: var(--accent); font-weight: 700; }
     .stat .label { color: #c6d0da; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
 
-    .kontakt-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; }
-    .kontakt-info h3 { font-size: 1rem; }
-    .kontakt-info p { color: var(--ink-muted); margin: 0; }
+    /* CTA block instead of a 3-col info grid */
+    .cta-block {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-left: 6px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 48px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cta-block h2 { margin-bottom: 6px; }
+    .cta-block p { margin: 0; color: var(--ink-muted); }
+    .cta-contacts { display: flex; flex-direction: column; gap: 4px; font-weight: 600; }
 
     footer {
       background: var(--navy);
@@ -126,6 +130,11 @@
       font-size: 0.9rem;
     }
     footer a { color: var(--accent); }
+
+    @media (max-width: 640px) {
+      .process-row { grid-template-columns: 56px 1fr; }
+      .process-row::before { font-size: 1.4rem; }
+    }
   </style>
 </head>
 <body>
@@ -139,7 +148,7 @@
     <div class="container header-inner">
       <div class="brand">NORD<span>BYGG</span> LULEÅ</div>
       <nav>
-        <a href="#tjanster">Tjänster</a>
+        <a href="#process">Så jobbar vi</a>
         <a href="#referenser">Referenser</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
@@ -152,29 +161,37 @@
       <h1>Solitt hantverk, hållna tider, ingen krångel</h1>
       <p>Vi tar hand om allt från badrumsrenovering till nybyggnation — med F-skatt, försäkring och referenser att visa upp.</p>
       <a class="btn" href="#kontakt">Begär offert</a>
-      <a class="btn-outline" href="#referenser">Se våra jobb</a>
     </div>
   </section>
 
-  <section id="tjanster">
+  <section class="process" id="process">
     <div class="container">
-      <h2>Vad vi gör</h2>
-      <div class="tjanster-grid">
-        <div class="tjanst">
-          <h3>Badrum & våtrum</h3>
-          <p>Komplett renovering med våtrumscertifierat utförande.</p>
+      <h2>Så jobbar vi</h2>
+      <p class="process-lead">Fyra steg från första samtalet till nyckelfärdigt jobb — ingen överraskning på vägen.</p>
+      <div class="process-list">
+        <div class="process-row">
+          <div class="process-content">
+            <h3>Kostnadsfritt hembesök</h3>
+            <p>Vi tittar på plats, lyssnar på vad ni vill ha och ger en muntlig bedömning direkt.</p>
+          </div>
         </div>
-        <div class="tjanst">
-          <h3>Tillbyggnad</h3>
-          <p>Från ritning till färdig inflyttning, med bygglovshjälp.</p>
+        <div class="process-row">
+          <div class="process-content">
+            <h3>Skriftlig offert</h3>
+            <p>Fast pris eller löpande räkning — ni väljer, och allt står tydligt i offerten innan vi börjar.</p>
+          </div>
         </div>
-        <div class="tjanst">
-          <h3>Kök</h3>
-          <p>Stomme, el, VVS och finsnickeri i ett paket.</p>
+        <div class="process-row">
+          <div class="process-content">
+            <h3>Genomförande</h3>
+            <p>Vi håller den tidsplan vi kommit överens om och städar efter oss varje dag.</p>
+          </div>
         </div>
-        <div class="tjanst">
-          <h3>Tak & fasad</h3>
-          <p>Täta tak och fasader som klarar Luleåvintern.</p>
+        <div class="process-row">
+          <div class="process-content">
+            <h3>Slutbesiktning</h3>
+            <p>Går igenom resultatet tillsammans med er innan vi kallar jobbet klart.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -192,18 +209,17 @@
   </section>
 
   <section id="kontakt">
-    <div class="container kontakt-info">
-      <div>
-        <h3>Ring oss</h3>
-        <p>070-000 00 01</p>
-      </div>
-      <div>
-        <h3>Mejla oss</h3>
-        <p>info@nordbyggluleaa.se</p>
-      </div>
-      <div>
-        <h3>Kontor</h3>
-        <p>Industrivägen 7, Luleå</p>
+    <div class="container">
+      <div class="cta-block">
+        <div>
+          <h2>Redo att sätta igång?</h2>
+          <p>Ring eller mejla — vi återkommer samma dag.</p>
+        </div>
+        <div class="cta-contacts">
+          <span>070-000 00 01</span>
+          <span>info@nordbyggluleaa.se</span>
+          <span>Industrivägen 7, Luleå</span>
+        </div>
       </div>
     </div>
   </section>
