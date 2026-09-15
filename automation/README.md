@@ -3,7 +3,8 @@
 Detta n8n-flöde tar emot data från hemsidans två formulär och hanterar dem olika:
 
 - **Begär offert** → sparas som en ny rad i ett Google Kalkylark (namn,
-  telefon, mejl, problem) och kunden får ett kort automatiskt tack-mejl.
+  telefon, mejl, problem), du får ett notismejl om den nya förfrågan, och
+  kunden får ett kort automatiskt tack-mejl.
 - **Kontakta mig** → skickas direkt vidare som ett mejl till dig, inget
   automatsvar.
 
@@ -34,8 +35,9 @@ Detta n8n-flöde tar emot data från hemsidans två formulär och hanterar dem o
 
 ## 4. Koppla en e-postavsändare (SMTP)
 
-Flödets två "Send Email"-noder (`Autosvar – Offert` och `Mejla Hugo – Kontakt`)
-behöver en SMTP-koppling för `contact.northsite@gmail.com`:
+Flödets tre "Send Email"-noder (`Mejla Hugo – Offert`, `Autosvar – Offert`
+och `Mejla Hugo – Kontakt`) behöver en SMTP-koppling för
+`contact.northsite@gmail.com`:
 
 1. Skapa ett **App-lösenord** för Gmail-kontot: Google-kontot →
    Säkerhet → Tvåstegsverifiering måste vara på → "Applösenord" →
@@ -46,9 +48,9 @@ behöver en SMTP-koppling för `contact.northsite@gmail.com`:
    - SSL/TLS: på
    - User: `contact.northsite@gmail.com`
    - Password: app-lösenordet från steg 1
-3. Öppna **"Autosvar – Offert"** och **"Mejla Hugo – Kontakt"** och välj
-   den nya SMTP-kopplingen i båda (de importeras utan koppling, så detta
-   måste göras manuellt en gång).
+3. Öppna **"Mejla Hugo – Offert"**, **"Autosvar – Offert"** och
+   **"Mejla Hugo – Kontakt"** och välj den nya SMTP-kopplingen i alla tre
+   (de importeras utan koppling, så detta måste göras manuellt en gång).
 
 ## 5. Aktivera flödet och hämta webhook-URL:en
 
@@ -72,8 +74,8 @@ Om formulären inte kan nå webhooken från webbläsaren (fel i konsolen om
 
 - Webbsidan skickar ett JSON-anrop (`fetch`) till webhooken med ett
   `formType`-fält (`"offert"` eller `"kontakt"`) plus formulärets fält.
-- **Offert:** flödet lägger till en rad i kalkylarket och skickar ett kort
-  tack-mejl till kundens e-postadress.
+- **Offert:** flödet lägger till en rad i kalkylarket, mejlar dig om den
+  nya förfrågan och skickar ett kort tack-mejl till kundens e-postadress.
 - **Kontakt:** flödet mejlar meddelandet direkt till dig, inget automatsvar.
 - Flödet svarar `{ "success": true }` till sidan, som då visar ett
   bekräftelsemeddelande för besökaren.

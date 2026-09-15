@@ -90,6 +90,24 @@
     {
       "parameters": {
         "fromEmail": "contact.northsite@gmail.com",
+        "toEmail": "contact.northsite@gmail.com",
+        "subject": "=Du har fått en ny offertförfrågan – {{ $('Webhook – Formulär').item.json.body.namn }}",
+        "emailFormat": "text",
+        "text": "=Du har fått en ny offertförfrågan!\n\nNamn: {{ $('Webhook – Formulär').item.json.body.namn }}\nFöretag: {{ $('Webhook – Formulär').item.json.body.foretag || '-' }}\nE-post: {{ $('Webhook – Formulär').item.json.body.epost }}\nTelefon: {{ $('Webhook – Formulär').item.json.body.telefon || '-' }}\n\nProblem med nuvarande webbplats:\n{{ $('Webhook – Formulär').item.json.body.problem }}\n\n(Sparad i kalkylarket automatiskt.)",
+        "options": {}
+      },
+      "id": "email-hugo-offert",
+      "name": "Mejla Hugo – Offert",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [700, 100],
+      "credentials": {
+        "smtp": { "id": "PLACEHOLDER", "name": "Northsite Gmail SMTP" }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "contact.northsite@gmail.com",
         "toEmail": "={{ $('Webhook – Formulär').item.json.body.epost }}",
         "subject": "Tack för din offertförfrågan – Northsite",
         "emailFormat": "text",
@@ -100,7 +118,7 @@
       "name": "Autosvar – Offert",
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
-      "position": [700, 180],
+      "position": [940, 180],
       "credentials": {
         "smtp": { "id": "PLACEHOLDER", "name": "Northsite Gmail SMTP" }
       }
@@ -115,7 +133,7 @@
       "name": "Svar – Offert",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
-      "position": [940, 180]
+      "position": [1180, 180]
     },
     {
       "parameters": {
@@ -159,6 +177,9 @@
       ]
     },
     "Lägg till i kalkylark – Offert": {
+      "main": [[{ "node": "Mejla Hugo – Offert", "type": "main", "index": 0 }]]
+    },
+    "Mejla Hugo – Offert": {
       "main": [[{ "node": "Autosvar – Offert", "type": "main", "index": 0 }]]
     },
     "Autosvar – Offert": {
