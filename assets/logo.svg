@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="northsiteMarkTitle">
-  <title id="northsiteMarkTitle">Northsite</title>
-  <path d="M16 50 L16 14 L48 50 L48 14" fill="none" stroke="#111111" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="brandMarkTitle">
+  <title id="brandMarkTitle">Körkort Norrland</title>
+  <path d="M14 50 L14 14" fill="none" stroke="#d94f30" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M46 14 L14 32 L46 50" fill="none" stroke="#d94f30" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
