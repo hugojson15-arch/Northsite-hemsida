@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaffehuset Björkskatan — exempel byggt av Northsite</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbf3e9;
+      --bg-alt: #f3e4cf;
+      --ink: #3a2416;
+      --ink-muted: #6b5847;
+      --border: #e4d0b3;
+      --accent: #b5652b;
+      --accent-dark: #8a4a1e;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Karla', -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+    h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; line-height: 1.15; margin: 0 0 0.4em; text-wrap: balance; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    a { color: var(--accent-dark); }
+
+    .demo-banner {
+      background: #2a1c10;
+      color: #f3e4cf;
+      text-align: center;
+      font-size: 0.85rem;
+      padding: 10px 16px;
+    }
+    .demo-banner a { color: #f3e4cf; text-decoration: underline; }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 24px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .brand { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.4rem; }
+    nav a { margin-left: 24px; color: var(--ink); text-decoration: none; font-weight: 500; }
+    nav a:hover { color: var(--accent-dark); }
+
+    /* Split hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+      min-height: 560px;
+    }
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px min(6vw, 80px);
+    }
+    .hero .eyebrow { text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-dark); font-weight: 700; font-size: 0.8rem; margin-bottom: 14px; }
+    .hero h1 { font-size: clamp(2rem, 4vw, 3.1rem); margin-bottom: 18px; }
+    .hero p { max-width: 480px; color: var(--ink-muted); font-size: 1.08rem; margin: 0 0 28px; }
+    .hero-photo {
+      background-image: url('assets/cafe-om.jpg');
+      background-size: cover;
+      background-position: center;
+      min-height: 320px;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 30px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      align-self: flex-start;
+    }
+    .btn:hover { background: var(--accent-dark); }
+
+    /* Menu as a real list */
+    .meny {
+      background: var(--bg-alt);
+      padding: 80px 0;
+    }
+    .meny-head { text-align: center; margin-bottom: 48px; }
+    .meny-head p { color: var(--ink-muted); max-width: 480px; margin: 8px auto 0; }
+    .meny-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 64px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .meny-group h3 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-dark);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+    .meny-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .meny-row .name { font-family: 'Fraunces', serif; font-weight: 600; white-space: nowrap; }
+    .meny-row .dots { flex: 1; border-bottom: 1px dotted var(--ink-muted); opacity: 0.5; transform: translateY(-4px); }
+    .meny-row .price { font-weight: 700; color: var(--accent-dark); white-space: nowrap; }
+    .meny-row .desc { display: block; font-size: 0.85rem; color: var(--ink-muted); margin-top: 2px; }
+
+    /* About strip */
+    .om {
+      padding: 70px 0;
+      text-align: center;
+    }
+    .om p { max-width: 620px; margin: 0 auto 0.6em; color: var(--ink-muted); font-size: 1.05rem; }
+    .om h2 { max-width: 620px; margin: 0 auto 20px; }
+
+    /* Info bar */
+    .info-bar {
+      background: var(--ink);
+      color: #f3e4cf;
+    }
+    .info-bar .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 36px 24px;
+    }
+    .info-bar .item { min-width: 160px; }
+    .info-bar .label { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.7rem; color: #d3a06a; margin-bottom: 4px; }
+
+    footer {
+      padding: 24px;
+      text-align: center;
+      color: var(--ink-muted);
+      font-size: 0.85rem;
+    }
+    footer a { color: var(--accent-dark); }
+
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-photo { min-height: 260px; order: -1; }
+      .meny-columns { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">
+    Detta är ett fiktivt exempel byggt av <strong>Northsite</strong> — inte ett riktigt företag.
+    <a href="../index.html">Tillbaka till northsite.se</a>
+  </div>
+
+  <header>
+    <div class="brand">Kaffehuset Björkskatan</div>
+    <nav>
+      <a href="#meny">Meny</a>
+      <a href="#besok">Besök oss</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Rosteri & bageri i Luleå</p>
+      <h1>Kaffe rostat i huset, bröd bakat varje morgon</h1>
+      <p>Ett stenkast från Björkskatans centrum — hit kommer du för långsam frukost, snabb lunchfralla eller bara en riktigt bra kopp kaffe.</p>
+      <a class="btn" href="#meny">Se vår meny</a>
+    </div>
+    <div class="hero-photo" aria-hidden="true"></div>
+  </section>
+
+  <section class="om">
+    <div class="container">
+      <h2>Rostat med omtanke sedan 2019</h2>
+      <p>Vi rostar egna bönor i den lilla rosteriet på baksidan och bakar allt bröd för hand varje morgon. Inget är fabriksgjort — allt är gjort av oss, för er i Björkskatan och Luleå.</p>
+    </div>
+  </section>
+
+  <section class="meny" id="meny">
+    <div class="container">
+      <div class="meny-head">
+        <h2>Vår meny</h2>
+        <p>Ett litet urval — hela menyn byts efter säsong och vad som är färskt.</p>
+      </div>
+      <div class="meny-columns">
+        <div class="meny-group">
+          <h3>Att dricka</h3>
+          <div class="meny-row">
+            <span class="name">Husets kaffe</span>
+            <span class="dots"></span>
+            <span class="price">32 kr</span>
+          </div>
+          <div class="meny-row">
+            <span class="name">Cappuccino</span>
+            <span class="dots"></span>
+            <span class="price">42 kr</span>
+          </div>
+          <div class="meny-row">
+            <span class="name">Chai latte</span>
+            <span class="dots"></span>
+            <span class="price">45 kr</span>
+          </div>
+        </div>
+        <div class="meny-group">
+          <h3>Att äta</h3>
+          <div class="meny-row">
+            <span class="name">Kanelbulle</span>
+            <span class="dots"></span>
+            <span class="price">28 kr</span>
+          </div>
+          <div class="meny-row">
+            <span class="name">Räkmacka på surdeg</span>
+            <span class="dots"></span>
+            <span class="price">98 kr</span>
+          </div>
+          <div class="meny-row">
+            <span class="name">Dagens soppa</span>
+            <span class="dots"></span>
+            <span class="price">89 kr</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-bar" id="besok">
+    <div class="container">
+      <div class="item">
+        <div class="label">Öppettider</div>
+        Mån–fre 07–18<br>Lör–sön 09–16
+      </div>
+      <div class="item">
+        <div class="label">Adress</div>
+        Björkskatavägen 12<br>974 42 Luleå
+      </div>
+      <div class="item">
+        <div class="label">Kontakt</div>
+        070-000 00 00<br>hej@bjorkskatankaffe.se
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Fiktivt exempel — byggt för att visa designstil. <a href="../index.html">Se vad Northsite kan bygga åt ditt företag →</a>
+  </footer>
+
+</body>
+</html>

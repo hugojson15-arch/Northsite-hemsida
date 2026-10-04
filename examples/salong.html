@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salong Nord — exempel byggt av Northsite</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbf1f2;
+      --bg-alt: #f6e2e4;
+      --ink: #3a2229;
+      --ink-muted: #7a5b62;
+      --border: #eccdd1;
+      --accent: #a5495c;
+      --accent-dark: #7d3444;
+      --gold: #b98a4e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Jost', -apple-system, sans-serif;
+      line-height: 1.7;
+    }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; line-height: 1.2; margin: 0 0 0.4em; text-wrap: balance; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    a { color: var(--accent-dark); }
+
+    .demo-banner {
+      background: #2f1a20;
+      color: #f6e2e4;
+      text-align: center;
+      font-size: 0.85rem;
+      padding: 10px 16px;
+    }
+    .demo-banner a { color: #f6e2e4; text-decoration: underline; }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 26px 24px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .brand { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.6rem; letter-spacing: 0.02em; }
+    nav a { margin-left: 26px; color: var(--ink); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    nav a:hover { color: var(--accent-dark); }
+
+    /* Offset editorial hero */
+    .hero {
+      position: relative;
+      padding: 20px 24px 100px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .hero-photo {
+      background-image: url('assets/salong-om.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      height: 60vh;
+      min-height: 380px;
+      border-radius: 2px;
+    }
+    .hero-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      max-width: 440px;
+      padding: 40px;
+      position: relative;
+      margin: -90px 0 0 auto;
+      box-shadow: 0 20px 50px rgba(58, 34, 41, 0.12);
+    }
+    .hero-card .eyebrow { text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold); font-weight: 600; font-size: 0.72rem; }
+    .hero-card h1 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); margin: 12px 0 14px; }
+    .hero-card p { color: var(--ink-muted); margin: 0 0 24px; }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 30px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+    }
+    .btn:hover { background: var(--accent-dark); }
+
+    section { padding: 60px 0; }
+
+    /* Price-list behandlingar, no cards */
+    .behandlingar h2 { text-align: center; }
+    .behandlingar .lead { text-align: center; color: var(--ink-muted); max-width: 480px; margin: 0 auto 44px; }
+    .price-list { max-width: 620px; margin: 0 auto; }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .price-row:first-child { border-top: 1px solid var(--border); }
+    .price-row h3 { font-size: 1.35rem; margin: 0; }
+    .price-row .desc { display: block; font-family: 'Jost', sans-serif; font-size: 0.88rem; color: var(--ink-muted); margin-top: 4px; }
+    .price-row .price { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--accent-dark); white-space: nowrap; }
+
+    .om {
+      background: var(--bg-alt);
+      text-align: center;
+    }
+    .om .container { max-width: 640px; }
+    .om .divider { width: 40px; height: 2px; background: var(--gold); margin: 0 auto 20px; }
+    .om p { color: var(--ink-muted); margin: 0 0 1em; }
+
+    /* Asymmetric footer info */
+    .info-split {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .info-split h2 { margin-bottom: 10px; }
+    .info-split .lead-col p { color: var(--ink-muted); margin: 0; }
+    .info-list { display: flex; flex-direction: column; gap: 18px; }
+    .info-list .label { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.7rem; color: var(--gold); margin-bottom: 4px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
+      text-align: center;
+      color: var(--ink-muted);
+      font-size: 0.9rem;
+    }
+    footer a { color: var(--accent-dark); }
+
+    @media (max-width: 720px) {
+      .hero-card { margin: -60px 0 0; max-width: 100%; padding: 28px; }
+      .info-split { grid-template-columns: 1fr; }
+      .price-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">
+    Detta är ett fiktivt exempel byggt av <strong>Northsite</strong> — inte ett riktigt företag.
+    <a href="../index.html">Tillbaka till northsite.se</a>
+  </div>
+
+  <header>
+    <div class="brand">Salong Nord</div>
+    <nav>
+      <a href="#behandlingar">Behandlingar</a>
+      <a href="#boka">Boka tid</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="hero-card">
+      <p class="eyebrow">Hår & skönhet i centrala Luleå</p>
+      <h1>En stund bara för dig</h1>
+      <p>Personlig behandling i lugn miljö — klippning, färgning och styling anpassat efter dig och din vardag.</p>
+      <a class="btn" href="#boka">Boka tid</a>
+    </div>
+  </section>
+
+  <section class="behandlingar" id="behandlingar">
+    <div class="container">
+      <h2>Behandlingar</h2>
+      <p class="lead">Ett urval av det vi erbjuder — fråga oss gärna om något du inte ser här.</p>
+      <div class="price-list">
+        <div class="price-row">
+          <div>
+            <h3>Klippning</h3>
+            <span class="desc">Konsultation, tvätt, klippning och styling</span>
+          </div>
+          <span class="price">Från 450 kr</span>
+        </div>
+        <div class="price-row">
+          <div>
+            <h3>Färgning</h3>
+            <span class="desc">Helfärg, slingor eller balayage efter önskemål</span>
+          </div>
+          <span class="price">Från 890 kr</span>
+        </div>
+        <div class="price-row">
+          <div>
+            <h3>Styling</h3>
+            <span class="desc">Fest, bröllop eller bara en helt vanlig fredag</span>
+          </div>
+          <span class="price">Från 350 kr</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="om">
+    <div class="container">
+      <div class="divider"></div>
+      <h2>Ett litet team, stort hantverk</h2>
+      <p>Vi är tre stylister som delar samma passion för hår — och för att varje kund ska lämna salongen nöjdare än de kom.</p>
+    </div>
+  </section>
+
+  <section id="boka">
+    <div class="container info-split">
+      <div class="lead-col">
+        <h2>Boka enkelt</h2>
+        <p>Ring oss eller skicka ett mejl, så hittar vi en tid som passar. Vi svarar oftast samma dag.</p>
+      </div>
+      <div class="info-list">
+        <div>
+          <div class="label">Öppettider</div>
+          Tis–fre 10–18<br>Lör 10–15
+        </div>
+        <div>
+          <div class="label">Adress</div>
+          Storgatan 24<br>972 32 Luleå
+        </div>
+        <div>
+          <div class="label">Kontakt</div>
+          070-000 00 02<br>boka@salongnord.se
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      Fiktivt exempel — byggt för att visa designstil. <a href="../index.html">Se vad Northsite kan bygga åt ditt företag →</a>
+    </div>
+  </footer>
+
+</body>
+</html>

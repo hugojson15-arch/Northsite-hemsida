@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /examples/
+
+Sitemap: https://northsite.se/sitemap.xml
